@@ -7,6 +7,7 @@ public class App {
         String chassi[] = new String[5];
         String nome[] = new String[5];
         String cor[] = new String[5];
+        boolean chassiExiste = false;
         int motor[] = new int[5];
         int totalCarros = 0;
         int op;
@@ -21,35 +22,55 @@ public class App {
             System.out.println("6 - Sair");
             System.out.print("Digite uma opção: ");
             op = teclado.nextInt();
+            teclado.nextLine();
 
             switch (op) {
                 case 1:
                     // O "chassi.length" é o menor valor do chassi
                     if (totalCarros < chassi.length) {
                         System.out.println("==== Cadastrar Carro ====");
-
+                        
                         System.out.print("Chassi: ");
-                        chassi[totalCarros] = teclado.next();
-                        System.out.println("====================");
+                        String novoChassi = teclado.nextLine();
 
-                        System.out.print("Nome do Carro: ");
-                        nome[totalCarros] = teclado.next();
-                        System.out.println("====================");
+                        //Variavel que verifica se o chassi já existe
+                        chassiExiste = false;
 
-                        System.out.print("Cor: ");
-                        cor[totalCarros] = teclado.next();
-                        System.out.println("====================");
+                        //Percorre todo o vetor do chassi, para conferir se o chassi já existe
+                        for (int i = 0; i < totalCarros; i++) {
+                            if (chassi[i] != null && chassi[i].equals(novoChassi)) {
+                                chassiExiste = true;
+                                break;
+                            }
+                        }
+                        //Informa erro se o chassi já existir
+                        if (chassiExiste) {
+                            System.out.println("Erro: O chassi informado já está cadastrado! Tente novamente.");
+                            break; 
+                        }else{
+                            chassi[totalCarros] = novoChassi;
 
-                        System.out.print("Motor: ");
-                        motor[totalCarros] = teclado.nextInt();
-                        System.out.println("====================");
+                            System.out.println("====================");
+                            System.out.print("Nome do Carro: ");
+                            nome[totalCarros] = teclado.nextLine();
 
-                        // Acrescenta +1 no valor da variável totalCarros
-                        totalCarros++;
+                            System.out.println("====================");
+                            System.out.print("Cor: ");
+                            cor[totalCarros] = teclado.nextLine();
 
-                        System.out.println("===============================");
-                        System.out.println("Carro INSERIDO Com Sucesso.");
-                        System.out.println("===============================");
+                            System.out.println("====================");
+                            System.out.print("Motor: ");
+                            motor[totalCarros] = teclado.nextInt();
+                            teclado.nextLine();
+                            System.out.println("====================");
+
+                            // Acrescenta +1 no valor da variável totalCarros
+                            totalCarros++;
+
+                            System.out.println("===============================");
+                            System.out.println("Carro INSERIDO Com Sucesso.");
+                            System.out.println("===============================");
+                    }
                     } else {
                         System.out.println("Limite de Carros Cadastrados Atingidos!");
                     }
@@ -57,8 +78,12 @@ public class App {
 
                 case 2:
                     System.out.println("===== Consultar por CHASSI =====");
+                    if (totalCarros == 0) {
+                        System.out.println("Não há carros cadastrados para consultar.");
+                        break;
+                    }
                     System.out.print("Digite o CHASSi para consultar: ");
-                    String filtroChassi = teclado.next();
+                    String filtroChassi = teclado.nextLine();
 
                     // Variável com a função de ACHAR o chassi digitado
                     boolean achou = false;
@@ -89,8 +114,12 @@ public class App {
 
                 case 3:
                     System.out.println("===== Removendo Carro =====");
+                    if (totalCarros == 0) {
+                        System.out.println("Não há carros cadastrados para remover.");
+                        break;
+                    }
                     System.out.print("Digite o CHASSI do carro que deseja remover: ");
-                    String removeChassi = teclado.next();
+                    String removeChassi = teclado.nextLine();
 
                     boolean encontrado = false;
                     for (int i = 0; i < totalCarros; i++) {
@@ -127,7 +156,7 @@ public class App {
                     }
 
                     System.out.print("Digite o CHASSI do carro que deseja alterar: ");
-                    String alterarChassi = teclado.next();
+                    String alterarChassi = teclado.nextLine();
                     boolean alterado = false;
 
                     for (int i = 0; i < totalCarros; i++) {
@@ -147,19 +176,19 @@ public class App {
                             System.out.println("Insira novos dados:");
                             System.out.println("====================");
                             System.out.print("Chassi: ");
-                            chassi[i] = teclado.next();
+                            chassi[i] = teclado.nextLine();
                             System.out.println("====================");
 
                             System.out.print("Nome do Carro: ");
-                            nome[i] = teclado.next();
+                            nome[i] = teclado.nextLine();
                             System.out.println("====================");
 
                             System.out.print("Cor: ");
-                            cor[i] = teclado.next();
+                            cor[i] = teclado.nextLine();
                             System.out.println("====================");
 
                             System.out.print("Motor: ");
-                            motor[i] = teclado.nextInt();
+                            motor[i] = teclado.nextInt();   
                             System.out.println("====================");
 
                             System.out.println("Dados Alterados com Sucesso.");
