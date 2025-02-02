@@ -48,6 +48,7 @@ public class App {
                             System.out.println("Erro: O chassi informado já está cadastrado! Tente novamente.");
                             break; 
                         }else{
+                            //Se o chassi não existe, segue o cadastro normalmente
                             chassi[totalCarros] = novoChassi;
 
                             System.out.println("====================");
